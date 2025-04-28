@@ -1,0 +1,18 @@
+# Ignorar carpetas y archivos pesados
+audio_env/
+separated/
+*.wav
+*.flac
+*.ogg
+*.dll
+*.pt
+*.pth
+*.mp3
+
+# Archivos de caché
+__pycache__/
+*.pyc
+*.pyo
+
+# Otros
+.DS_Store
