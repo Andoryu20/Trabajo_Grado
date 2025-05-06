@@ -23,11 +23,12 @@ from audio_utils import (
 )
 
 from visuals import (
+    graficar_espectrograma,
     mostrar_espectrograma,
     mostrar_espectrogramas_separados,
     mostrar_comparacion_fft,
-    
 )
+
 
 class AudioPlayerApp:
     def __init__(self, root):
@@ -215,15 +216,29 @@ class AudioPlayerApp:
 
     def ver_espectrograma_original(self):
         if self.audio_file is not None:
-            mostrar_espectrograma(self.audio_file, self.sr, "Original")
+            plt.figure(figsize=(12, 4))
+            graficar_espectrograma(self.audio_file, self.sr, "Original")
+            plt.tight_layout()
+            plt.show()
         else:
             messagebox.showwarning("Advertencia", "Primero carga un audio")
 
+
     def ver_espectrogramas_separados(self):
         if self.vocal_track is not None and self.instrumental_track is not None:
-            mostrar_espectrogramas_separados(self.vocal_track, self.instrumental_track, self.sr)
+            plt.figure(figsize=(12, 8))
+
+            plt.subplot(2, 1, 1)
+            graficar_espectrograma(self.vocal_track, self.sr, "Voz - Separada")
+
+            plt.subplot(2, 1, 2)
+            graficar_espectrograma(self.instrumental_track, self.sr, "Instrumental - Separado")
+
+            plt.tight_layout()
+            plt.show()
         else:
             messagebox.showwarning("Advertencia", "Primero separa las pistas")
+
 
     def ver_fft_vocal(self):
         if self.vocal_track is None:
